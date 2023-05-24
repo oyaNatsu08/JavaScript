@@ -1,3 +1,5 @@
+'use strict';
+
 document.getElementById('calc').addEventListener('click', () => {
     const score1 = Number(document.getElementById('score1').value);
     const score2 = Number(document.getElementById('score2').value);

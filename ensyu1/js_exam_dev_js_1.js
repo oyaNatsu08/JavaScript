@@ -1,3 +1,5 @@
+'use strict';
+
 document.getElementById('edit').addEventListener('click', () => {
     const color = document.getElementById('color').value;
     const image = document.getElementById('image').value;
