@@ -3,6 +3,8 @@ document.getElementById('calc').addEventListener('click', () => {
     const score2 = Number(document.getElementById('score2').value);
     const score3 = Number(document.getElementById('score3').value);
 
+    console.log(score1, score2, score3);
+
     function calc(score1, score2, score3) {
         const result = score1 + score2 + score3;
         return result;

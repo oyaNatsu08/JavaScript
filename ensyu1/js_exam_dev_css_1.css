@@ -1,0 +1,15 @@
+img {
+    height: 200px;
+    width: 300px;
+    border: 2px solid;
+    border-color: aqua;
+}
+.red {
+    color: red;
+}
+.green {
+    color: green;
+}
+.blue {
+    color: blue;
+}
