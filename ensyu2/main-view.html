@@ -4,38 +4,66 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="js_css.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
-    <h1>石取りゲーム</h1>
+    <div id="app">
 
-    <div id="settings">
-        <h3>ゲームの条件を設定してください</h3>
+        <h1>石取りゲーム</h1>
 
-        <p>
-            石の総数を指定してください
-            <input id="stone-sum" class="margin-left">
-        </p>
+        <div v-if="isSettings">
+            <h3>ゲームの条件を設定してください</h3>
 
-        <p>
-            一度に取れる石の数を指定してください
-            <input id="stone-take" class="margin-left">
-        </p>
+            <p>
+                石の総数を指定してください(10~100)
+                <input class="margin-left" v-model="newTotal" type="number" min="10" max="100" @change="validateTotal">
+            </p>
 
-        <p>
-            プレイヤーを指定してください
-            <input id="player" class="margin-left">
-        </p>
+            <p>
+                一度に取れる石の数を指定してください(1~10)
+                <input class="margin-left" v-model="newTake" type="number" min="1" max="10" @change="validateTake">
+            </p>
 
-        <p>
-            石の記号を指定してください
-            <input id="symbol" class="margin-left">
-        </p>
+            <p>
+                プレイヤーを指定してください(カンマ区切りで入力)
+                <input class="margin-left" v-model="newPlayers">
+            </p>
 
-        <button id="submit">決定</button>
+            <p>
+                石の記号を指定してください
+                <input class="margin-left" v-model="newSymbol">
+            </p>
+
+            <button @click="gameStart">決定</button>
+        </div>
+
+        <div v-for="gameInfo in gameInfos" v-if="isInfo">
+            <p>石の総数：{{ gameInfo.total }}</p>
+            <p>一度に取れる石の数：{{ gameInfo.take }}</p>
+            <p>
+                参加プレイヤー：
+                <span v-for="player in gameInfo.players">{{ player + ' ' }}</span>
+            </p>
+            <p>石の記号：{{ gameInfo.symbol }}</p>
+            <p> {{ text }} </p>
+            <p>残り： {{ leftCount }}  個 </p>
+            <p> {{ leftStone }} </p>
+            <p> {{ text }} </p>
+
+            <h3> {{ gameInfo.players[ index ] }}  の番 </h3>
+            <p> いくつ取りますか？(1～{{ newTake }}個まで取れます) </p>
+            <p><input v-model="curentTake" @change="validateCurentTake"></p>
+            <button @click="take">決定</button>
+        </div>
+
+        <div v-if="isResult">
+            <p class="red">勝者： {{ winner }} </p>
+            <p class="blue">敗者： {{ loser }} </p>
+        </div>
+
     </div>
-
-
+    
     <script src="js_exam_js.js"></script>
 </body>
 
